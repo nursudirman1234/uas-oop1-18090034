@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Aplikasi Data Mahasiswa</title>
+</head>
+<body>
+    <h1 style="text-align: center">Aplikasi Data Mahasiswa</h1>
+
+    <p><a href="/tambah"><input type="submit" style="background-color: blue; padding: 10px; border-radius: 15px; width: 150px; color: white" value="Tambah Data Mahasiswa"></a></p>
+
+    <div th:switch="${data}">
+        <div>
+            <h2 th:case="null">Tidak ada data</h2>
+            <div th:case="*">
+                <table border="1" style="width: auto">
+                    <thead style="background-color: black">
+                        <tr style="color: white">
+                            <th>NIM</th>
+                            <th>Nama</th>
+                            <th>Jurusan</th>
+                            <th>Alamat</th>
+                            <th>Obsi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="data : ${data}">
+                            <td th:text="${data.nim}"></td>
+                            <td th:text="${data.nama}"></td>
+                            <td th:text="${data.jurusan}"></td>
+                            <td th:text="${data.alamat}"></td>
+                            <td>
+                                <a th:href="@{/ubah/{nim}(nim=${data.nim})}"><input type="submit" style="background-color: green; padding: 10px; border-radius: 15px; width: 150px; color: white;" value="Edit"></a>
+                                <a th:href="@{/hapus/{nim}(nim=${data.nim})}"><input type="submit" style="background-color: red; padding: 10px; border-radius: 15px; width: 150px; color: white;" value="Delete"></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
